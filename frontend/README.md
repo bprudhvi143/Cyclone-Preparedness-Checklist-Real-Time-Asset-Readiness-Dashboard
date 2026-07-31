@@ -62,3 +62,16 @@ src/
     npm run dev
     ```
     This will serve the app on `http://localhost:5173`.
+
+---
+
+## Demo Credentials & User Roles
+
+You can log in to the portal at `http://localhost:5173/login` using the following pre-seeded officer credentials:
+
+| User Role | Email Address | Password | Clearances & Views |
+| :--- | :--- | :--- | :--- |
+| **System Admin** | `admin@gvmc.gov.in` | `admin_pass_2026` | Full administrative control, register new users, view zones, wards, and audit reports. |
+| **Commissioner** | `commissioner@gvmc.gov.in` | `comm_pass_2026` | Read-only access to all municipal zone/ward readiness scores, charts, geofencing maps, and CSV exports. |
+| **Zone Officer** | `zone1@gvmc.gov.in` | `zone_pass_2026` | Manage shelters, review warnings, and assign investigators for alerts within Zone 1. |
+| **Field Officer** | `field1@gvmc.gov.in` | `field_pass_2026` | Fill out dynamic preparedness checklists, upload verification photos, and view past logs. |
