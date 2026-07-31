@@ -1,5 +1,6 @@
 from datetime import timedelta
 import logging
+from typing import Optional
 from uuid import UUID
 from fastapi import HTTPException
 from app.core.security import hash_password, verify_password, create_access_token, create_refresh_token, decode_token
