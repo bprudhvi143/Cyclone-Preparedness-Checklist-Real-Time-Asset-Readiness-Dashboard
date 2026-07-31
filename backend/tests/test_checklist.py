@@ -36,7 +36,7 @@ async def test_checklist_template_and_submission(client: AsyncClient, db_session
         ward_id=user.id, # Using user.id as dummy ward_id to satisfy foreign key in sqlite test
         name="Test MVP Shelter",
         address="Test Address",
-        location=None,
+        location="POINT(83.33 17.74)",
         capacity=100
     )
     db_session.add(shelter)

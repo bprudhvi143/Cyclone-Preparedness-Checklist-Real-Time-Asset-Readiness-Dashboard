@@ -63,8 +63,23 @@ async def submit_checklist(
     lat, lon = 0.0, 0.0
     if submission.submitted_gps is not None:
         from shapely import wkb
-        geom = wkb.loads(bytes(submission.submitted_gps.data))
-        lon, lat = geom.x, geom.y
+        from shapely.wkt import loads as wkt_loads
+        geom = None
+        if hasattr(submission.submitted_gps, "data"):
+            geom = wkb.loads(bytes(submission.submitted_gps.data))
+        elif isinstance(submission.submitted_gps, str):
+            if submission.submitted_gps.strip().upper().startswith("POINT"):
+                geom = wkt_loads(submission.submitted_gps)
+            else:
+                try:
+                    geom = wkb.loads(bytes.fromhex(submission.submitted_gps))
+                except Exception:
+                    pass
+        else:
+            geom = submission.submitted_gps
+            
+        if geom:
+            lon, lat = geom.x, geom.y
 
     resp_details = []
     for r in submission.responses:

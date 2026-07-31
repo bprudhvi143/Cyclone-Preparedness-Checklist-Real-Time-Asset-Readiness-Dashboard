@@ -16,6 +16,10 @@ class MockResponse:
         self.question = MockQuestion(category_title, weight)
         self.response_value = value
 
+class MockSubmission:
+    def __init__(self, responses):
+        self.responses = responses
+
 def test_submission_readiness_scoring():
     # Arrange: Mock a submission containing responses across 4 categories
     responses = [
@@ -29,8 +33,7 @@ def test_submission_readiness_scoring():
         MockResponse("Staged Emergency Volunteers", 3, "YES")
     ]
     
-    mock_submission = ChecklistSubmission()
-    mock_submission.responses = responses
+    mock_submission = MockSubmission(responses)
     
     section_weights = {
         "INFRASTRUCTURE": 0.40,

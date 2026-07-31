@@ -8,7 +8,7 @@ from sqlalchemy.orm import selectinload
 from app.core.config import settings
 from app.infrastructure.db.models import (
     ChecklistTemplate, ChecklistSubmission, ChecklistResponse, PhotoMetadata,
-    Shelter, Asset, ChecklistQuestion
+    Shelter, Asset, ChecklistQuestion, ChecklistSection
 )
 from app.infrastructure.db.repositories.custom_repositories import ChecklistSubmissionRepository
 from app.presentation.schemas import ChecklistSubmissionCreate, ChecklistSubmissionResponse

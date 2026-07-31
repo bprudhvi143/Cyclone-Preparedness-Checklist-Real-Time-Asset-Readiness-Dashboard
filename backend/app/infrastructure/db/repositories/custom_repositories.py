@@ -4,7 +4,7 @@ from sqlalchemy import select, func, and_, or_
 from sqlalchemy.orm import selectinload
 from app.infrastructure.db.repositories.base_repository import BaseRepository
 from app.infrastructure.db.models import (
-    User, Ward, Shelter, Asset, ChecklistSubmission, ChecklistTemplate, SystemAlert, ReadinessSnapshot
+    User, Ward, Shelter, Asset, ChecklistSubmission, ChecklistTemplate, SystemAlert, ReadinessSnapshot, ChecklistResponse
 )
 from geoalchemy2.functions import ST_Distance, ST_GeomFromText
 
@@ -43,7 +43,7 @@ class ChecklistSubmissionRepository(BaseRepository[ChecklistSubmission]):
             select(ChecklistSubmission)
             .options(
                 selectinload(ChecklistSubmission.responses)
-                .selectinload(ChecklistSubmission.photo)
+                .selectinload(ChecklistResponse.photo)
             )
             .where(and_(ChecklistSubmission.id == submission_id, ChecklistSubmission.deleted_at == None))
         )

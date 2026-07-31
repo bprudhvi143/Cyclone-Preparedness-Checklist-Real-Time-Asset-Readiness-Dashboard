@@ -13,6 +13,12 @@ class BaseRepository(Generic[ModelType]):
 
     async def get_by_id(self, id: UUID) -> Optional[ModelType]:
         """Fetch a single record by UUID, checking soft-delete status if present."""
+        import uuid
+        if isinstance(id, str):
+            try:
+                id = uuid.UUID(id)
+            except ValueError:
+                pass
         query = select(self.model).where(self.model.id == id)
         if hasattr(self.model, "deleted_at"):
             query = query.where(self.model.deleted_at == None)
@@ -93,6 +99,12 @@ class BaseRepository(Generic[ModelType]):
 
     async def delete(self, id: UUID, soft: bool = True) -> bool:
         """Delete a record, supporting soft delete."""
+        import uuid
+        if isinstance(id, str):
+            try:
+                id = uuid.UUID(id)
+            except ValueError:
+                pass
         db_obj = await self.get_by_id(id)
         if not db_obj:
             return False
